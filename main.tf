@@ -19,16 +19,37 @@ resource "aws_internet_gateway" "default" {
     }
 }
 
-resource "aws_subnet" "subnets" {
+resource "aws_subnet" "subnet1-public" {
     vpc_id = "${aws_vpc.default.id}"
-	count = 3 #Count starts always from 0.
-    cidr_block = "${element(var.blocks, count.index)}"
-    availability_zone = "${element(var.azs, count.index)}"
+    cidr_block = "${var.public_subnet1_cidr}"
+    availability_zone = "us-west-1a"
 
-    tags {
-        Name = "Terraform-Subnet-${count.index+1}"
+    tags = {
+        Name = "${var.public_subnet1_name}"
     }
 }
+
+resource "aws_subnet" "subnet2-public" {
+    vpc_id = "${aws_vpc.default.id}"
+    cidr_block = "${var.public_subnet2_cidr}"
+    availability_zone = "us-west-1b"
+
+    tags = {
+        Name = "${var.public_subnet2_name}"
+    }
+}
+
+resource "aws_subnet" "subnet3-public" {
+    vpc_id = "${aws_vpc.default.id}"
+    cidr_block = "${var.public_subnet3_cidr}"
+    availability_zone = "us-west-1c"
+
+    tags = {
+        Name = "${var.public_subnet3_name}"
+    }
+
+}
+
 
 resource "aws_route_table" "terraform-public" {
     vpc_id = "${aws_vpc.default.id}"
@@ -44,8 +65,7 @@ resource "aws_route_table" "terraform-public" {
 }
 
 resource "aws_route_table_association" "terraform-public" {
-    count = "${length(var.blocks)}"
-    subnet_id = "${element(aws_subnet.subnets.*.id, count.index)}" #"${aws_subnet.subnets.*.id}"
+    subnet_id = "${aws_subnet.subnet1-public.id}"
     route_table_id = "${aws_route_table.terraform-public.id}"
 }
 
