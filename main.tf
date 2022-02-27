@@ -59,7 +59,7 @@ resource "aws_route_table" "terraform-public" {
         gateway_id = "${aws_internet_gateway.default.id}"
     }
 
-    tags {
+    tags = {
         Name = "${var.Main_Routing_Table}"
     }
 }
