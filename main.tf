@@ -72,12 +72,12 @@ resource "aws_security_group" "allow_all" {
 	
 
 terraform {
- backend “s3” {
+ backend "s3" {
  encrypt = true
  bucket = "sstorage"
  dynamodb_table = "terraform-state-lock-dynamo"
- region = us-east-1
- key = terraform.tfstate
+ region = "us-west-1"
+ key = "terraform.tfstate"
  }
 }
 
