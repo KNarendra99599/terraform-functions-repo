@@ -5,10 +5,10 @@ variable "amis" {
     description = "AMIs by region"
 	type = map(string)
     default = {
-        us-west-1 = "ami-97785bed" # ubuntu 14.04 LTS
-		us-wast-2 = "ami-f63b1193" # ubuntu 14.04 LTS
-		us-west-1 = "ami-824c4ee2" # ubuntu 14.04 LTS
-		us-west-2 = "ami-f2d3638a" # ubuntu 14.04 LTS
+        us-west-1 = "ami-0454207e5367abf01" # ubuntu 16.04 LTS
+		us-wast-2 = "ami-0688ba7eeeeefe3cd" # ubuntu 16.04 LTS
+		us-east-1 = "ami-0b0ea68c435eb488d" # ubuntu 16.04 LTS
+		us-east-2 = "ami-05803413c51f242b7" # ubuntu 16.04 LTS
     }
 }
 variable "vpc_cidr" {}
